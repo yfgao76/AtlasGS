@@ -1,6 +1,0 @@
-matplotlib
-nibabel
-numpy
-Pillow
-scikit-image
-scipy
