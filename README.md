@@ -1,10 +1,10 @@
-# AtlasGS [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/) [![arXiv](https://img.shields.io/badge/arXiv-coming_soon-red.svg)]()
+# AtlasGS [![Python](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/) [![arXiv](https://img.shields.io/badge/arXiv-2606.02961-red.svg)](https://arxiv.org/abs/2606.02961)
 
 Shared Gaussian Geometry for Brain MRI Spatial Resolution Harmonization Without External Training.
 
 AtlasGS is a research codebase for multi-contrast brain MRI through-plane super-resolution with Gaussian Splatting. It learns a subject-specific Gaussian geometry from an isotropic T1-weighted scan, then reuses that geometry to reconstruct sparse, thick-slice target modalities such as FLAIR, T2w, DWI, and ASL.
 
-- [arXiv Paper]()
+- [arXiv Paper](https://arxiv.org/abs/2606.02961)
 - [Source Code](https://github.com/yfgao76/AtlasGS)
 
 ## Overview
@@ -208,7 +208,7 @@ If you use AtlasGS, please cite:
 ## 7. Resources
 
 - [AtlasGS source code](https://github.com/yfgao76/AtlasGS)
-- [arXiv paper]()
+- [arXiv paper](https://arxiv.org/abs/2606.02961)
 
 ## 8. Acknowledgements
 
