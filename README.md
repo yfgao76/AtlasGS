@@ -43,16 +43,18 @@ This repository provides entrypoints for the paper's subject-specific MRI harmon
 
 | Study | Target modalities | Degradation | Main entrypoint |
 | --- | --- | --- | --- |
-| UK Biobank | FLAIR | z-axis x3, x5, x7 | `atlasgs/experiments/run_ukbb_all_methods_z7.sbatch` |
-| UPenn-GBM | T2w, FLAIR | z-axis x7 | `atlasgs/experiments/run_gbm_all_methods_z7.sbatch` |
-| ABCD-derived | DWI, ASL | factor x3 | `atlasgs/experiments/run_hcp_all_methods_z3.sbatch` |
+| UK Biobank | FLAIR | z-axis x3, x5, x7 | `atlasgs/experiments/run_ukbb_all_methods_z7.sh` |
+| UPenn-GBM | T2w, FLAIR | z-axis x7 | `atlasgs/experiments/run_gbm_all_methods_z7.sh` |
+| ABCD-derived | DWI, ASL | factor x3 | `atlasgs/experiments/run_hcp_all_methods_z3.sh` |
 | Single subject | configurable | configurable | `python -m atlasgs.experiments.run_subject` |
 
-Summary: use the dataset-level SLURM scripts to reproduce paper-scale runs, and use `run_subject` for debugging or single-case experiments.
+Summary: use the dataset-level Bash scripts to reproduce paper-scale runs, and use `run_subject` for debugging or single-case experiments.
 
 ## 2. Quick Start and Implementation Guidance
 
 > **Implementation guidance:** run commands from the repository root, keep controlled-access datasets outside version control, set `MEDGS_ROOT` before baseline runs, and write generated checkpoints/metrics under ignored output directories such as `outputs_dataset/`.
+
+The experiment wrappers are plain Bash scripts. Run them with `bash atlasgs/experiments/<script>.sh` and configure paths or resource choices through environment variables such as `MEDGS_ROOT`, `DATA_ROOT`, `OUT_ROOT`, `GPU_IDS`, `PARALLEL_SUBJECTS`, and `WORKERS`.
 
 ### 2.1 Installation
 
@@ -94,14 +96,14 @@ Prepare ABCD/HCP-style ASL-DWI data:
 ```bash
 SRC_ROOT=/path/to/PT008_AdolescentBrainDevelopment \
 SYNTHSTRIP_SIF=/path/to/freesurfer.sif \
-sbatch atlasgs/experiments/prepare_hcp.sbatch
+bash atlasgs/experiments/prepare_hcp.sh
 ```
 
 Prepare GBM T2/FLAIR data:
 
 ```bash
 SRC_ROOT=/path/to/GBM_Dataset \
-sbatch atlasgs/experiments/prepare_gbm.sbatch
+bash atlasgs/experiments/prepare_gbm.sh
 ```
 
 `SYNTHSTRIP_SIF` is required only when HCP preparation uses SynthStrip skull stripping. Use `NO_SKULLSTRIP=1` to skip that step.
@@ -112,21 +114,21 @@ Run UK Biobank FLAIR experiments at z-axis factors 3, 5, and 7:
 
 ```bash
 MEDGS_ROOT=/path/to/MedGS \
-sbatch atlasgs/experiments/run_ukbb_all_methods_z7.sbatch
+bash atlasgs/experiments/run_ukbb_all_methods_z7.sh
 ```
 
 Run ABCD/HCP-style ASL-DWI experiments at factor 3:
 
 ```bash
 MEDGS_ROOT=/path/to/MedGS \
-sbatch atlasgs/experiments/run_hcp_all_methods_z3.sbatch
+bash atlasgs/experiments/run_hcp_all_methods_z3.sh
 ```
 
 Run GBM T2/FLAIR experiments at factor 7:
 
 ```bash
 MEDGS_ROOT=/path/to/MedGS \
-sbatch atlasgs/experiments/run_gbm_all_methods_z7.sbatch
+bash atlasgs/experiments/run_gbm_all_methods_z7.sh
 ```
 
 Run one subject directly:
@@ -152,13 +154,13 @@ Aggregate UK Biobank metrics and external INR/SA-INR baselines:
 
 ```bash
 INR_BASE=/path/to/external_metrics/brain-gs \
-sbatch atlasgs/experiments/run_analyze_ukbb_with_external_inr.sbatch
+bash atlasgs/experiments/run_analyze_ukbb_with_external_inr.sh
 ```
 
 Compute GBM and ABCD table metrics:
 
 ```bash
-sbatch atlasgs/experiments/run_analyze_gbm_abcd_table.sbatch
+bash atlasgs/experiments/run_analyze_gbm_abcd_table.sh
 ```
 
 Generate UK Biobank orthogonal-plane overlays:
@@ -166,7 +168,7 @@ Generate UK Biobank orthogonal-plane overlays:
 ```bash
 INR_ROOT=/path/to/inr_ukbb_ds7 \
 SA_ROOT=/path/to/sa_inr_ukbb_ds7 \
-sbatch atlasgs/experiments/run_ukbb_overlays_orth_z7_all.sbatch
+bash atlasgs/experiments/run_ukbb_overlays_orth_z7_all.sh
 ```
 
 ## 3. Documentation: data preparation, training, and evaluation entrypoints
@@ -175,7 +177,7 @@ sbatch atlasgs/experiments/run_ukbb_overlays_orth_z7_all.sbatch
 | --- | --- |
 | `atlasgs/ops/` | Data preparation, degradation, NIfTI/frame conversion, and resampling utilities |
 | `atlasgs/train/` | AtlasGS and baseline training modules |
-| `atlasgs/experiments/` | Single-subject, dataset-level, and SLURM experiment entrypoints |
+| `atlasgs/experiments/` | Single-subject, dataset-level, and Bash experiment entrypoints |
 | `atlasgs/eval/` | Metric aggregation, ablation analysis, overlays, and figure utilities |
 | `atlasgs/models/` | Lightweight INR and regularization modules |
 | `examples/` | Minimal input templates |

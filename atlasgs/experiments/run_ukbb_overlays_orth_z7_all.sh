@@ -1,13 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=ukbb_overlay_z7
-#SBATCH --output=logs/ukbb_overlay_z7_%j.out
-#SBATCH --error=logs/ukbb_overlay_z7_%j.err
-#SBATCH --partition=defq
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=64G
-#SBATCH --time=24:00:00
+#!/usr/bin/env bash
 
 set -euo pipefail
 

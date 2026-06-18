@@ -1,13 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=hcp_ssim_z3
-#SBATCH --partition=defq
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=48G
-#SBATCH --time=24:00:00
-#SBATCH --output=logs/hcp_ssim_z3_%j.out
-#SBATCH --error=logs/hcp_ssim_z3_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 

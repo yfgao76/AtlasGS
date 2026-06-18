@@ -1,14 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=medgs_gbm_one
-#SBATCH --partition=gpu
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --gres=gpu:l40s:1
-#SBATCH --time=24:00:00
-#SBATCH --mem=64G
-#SBATCH --output=logs/medgs_gbm_one_%j.out
-#SBATCH --error=logs/medgs_gbm_one_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 
@@ -42,7 +32,7 @@ set -u
 conda activate medgs
 
 echo "Host: $(hostname)"
-echo "SLURM_JOB_ID: ${SLURM_JOB_ID:-none}"
+echo "Run mode: bash"
 nvidia-smi || true
 
 cmd=(

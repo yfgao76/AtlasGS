@@ -1,11 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=prepare_hcp_medgs
-#SBATCH --nodes=1
-#SBATCH --cpus-per-task=24
-#SBATCH --time=24:00:00
-#SBATCH --mem=96G
-#SBATCH --output=logs/prepare_hcp_%j.out
-#SBATCH --error=logs/prepare_hcp_%j.err
+#!/usr/bin/env bash
 
 set -eo pipefail
 
@@ -15,7 +8,7 @@ ROOT=${ATLASGS_ROOT:-$(cd "${SCRIPT_DIR}/../.." && pwd)}
 OUT_ROOT=${OUT_ROOT:-${ROOT}/data/hcp_medgs}
 PROJECT_ROOT=${PROJECT_ROOT:-${ROOT}}
 SYNTHSTRIP_SIF=${SYNTHSTRIP_SIF:-}
-WORKERS=${SLURM_CPUS_PER_TASK:-16}
+WORKERS=${WORKERS:-16}
 
 ALIGN_METHOD=${ALIGN_METHOD:-rigid}
 TRAIN_RATIO=${TRAIN_RATIO:-0.5}
@@ -35,16 +28,17 @@ ALLOW_MISSING_DWI=${ALLOW_MISSING_DWI:-0}
 mkdir -p "${ROOT}/logs"
 mkdir -p "${OUT_ROOT}"
 
-module load apptainer/1.0.1
-
 export BASHRCSOURCED=1
 set +u
 source ~/.bashrc >/dev/null 2>&1 || true
+if [[ -n "${SYNTHSTRIP_SIF}" ]] && command -v module >/dev/null 2>&1; then
+  module load "${APPTAINER_MODULE:-apptainer/1.0.1}" >/dev/null 2>&1 || true
+fi
 conda activate medgs
 set -u
 
 echo "Host: $(hostname)"
-echo "CPUs: ${SLURM_CPUS_PER_TASK:-1}"
+echo "Workers: ${WORKERS}"
 echo "ALIGN_METHOD=${ALIGN_METHOD}"
 echo "DWI_PREF=${DWI_PREF}"
 echo "OUT_ROOT=${OUT_ROOT}"

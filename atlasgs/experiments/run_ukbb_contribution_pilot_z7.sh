@@ -1,14 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=ukbb_contrib_pilot
-#SBATCH --partition=gpu
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=12
-#SBATCH --gres=gpu:l40s:2
-#SBATCH --time=36:00:00
-#SBATCH --mem=96G
-#SBATCH --output=logs/ukbb_contrib_pilot_%j.out
-#SBATCH --error=logs/ukbb_contrib_pilot_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
@@ -34,7 +24,7 @@ set -u
 conda activate medgs
 
 echo "Host: $(hostname)"
-echo "SLURM_JOB_ID: ${SLURM_JOB_ID:-none}"
+echo "Run mode: bash"
 nvidia-smi || true
 
 python -m atlasgs.experiments.run_ukbb_contribution_pilot \

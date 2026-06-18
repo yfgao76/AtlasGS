@@ -1,13 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=gbm_roi_z7
-#SBATCH --partition=defq
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=64G
-#SBATCH --time=12:00:00
-#SBATCH --output=logs/gbm_roi_z7_%j.out
-#SBATCH --error=logs/gbm_roi_z7_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 

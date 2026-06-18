@@ -1,13 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=ukbb_bsp_all
-#SBATCH --partition=defq
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=32G
-#SBATCH --time=12:00:00
-#SBATCH --output=logs/ukbb_bspline_all_%j.out
-#SBATCH --error=logs/ukbb_bspline_all_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 

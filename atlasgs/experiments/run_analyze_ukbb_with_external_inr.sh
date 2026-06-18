@@ -1,13 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=ukbb_anlz
-#SBATCH --partition=defq
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=32G
-#SBATCH --time=08:00:00
-#SBATCH --output=logs/ukbb_analyze_extinr_%j.out
-#SBATCH --error=logs/ukbb_analyze_extinr_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 

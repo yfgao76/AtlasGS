@@ -1,13 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=ukbb_contrib_existing
-#SBATCH --partition=defq
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
-#SBATCH --time=02:00:00
-#SBATCH --mem=24G
-#SBATCH --output=logs/ukbb_contrib_existing_%j.out
-#SBATCH --error=logs/ukbb_contrib_existing_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)

@@ -1,14 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=medgs_gbm_all
-#SBATCH --partition=gpu
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=8
-#SBATCH --gres=gpu:h100:2
-#SBATCH --time=168:00:00
-#SBATCH --mem=64G
-#SBATCH --output=logs/medgs_gbm_all_%j.out
-#SBATCH --error=logs/medgs_gbm_all_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 

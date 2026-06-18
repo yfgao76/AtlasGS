@@ -1,13 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=tbl_gbm_abcd
-#SBATCH --partition=defq
-#SBATCH --nodes=1
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=96G
-#SBATCH --time=24:00:00
-#SBATCH --output=logs/tbl_gbm_abcd_%j.out
-#SBATCH --error=logs/tbl_gbm_abcd_%j.err
+#!/usr/bin/env bash
 
 set -euo pipefail
 

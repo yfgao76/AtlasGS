@@ -1,13 +1,4 @@
-#!/bin/bash
-#SBATCH --job-name=prepare_gbm_medgs
-#SBATCH --partition=gpu
-#SBATCH --nodes=1
-#SBATCH --cpus-per-task=16
-#SBATCH --gres=gpu:l40s:1
-#SBATCH --time=12:00:00
-#SBATCH --mem=64G
-#SBATCH --output=logs/prepare_gbm_%j.out
-#SBATCH --error=logs/prepare_gbm_%j.err
+#!/usr/bin/env bash
 
 set -eo pipefail
 
@@ -16,7 +7,7 @@ SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 ROOT=${ATLASGS_ROOT:-$(cd "${SCRIPT_DIR}/../.." && pwd)}
 OUT_ROOT=${OUT_ROOT:-${ROOT}/data/gbm_medgs}
 PROJECT_ROOT=${PROJECT_ROOT:-${ROOT}}
-WORKERS=${SLURM_CPUS_PER_TASK:-12}
+WORKERS=${WORKERS:-12}
 
 mkdir -p "${ROOT}/logs"
 mkdir -p "${OUT_ROOT}"
@@ -28,8 +19,8 @@ conda activate medgs
 set -u
 
 echo "Host: $(hostname)"
-echo "GPUs: ${SLURM_GPUS_ON_NODE:-0}"
-echo "CPUs: ${SLURM_CPUS_PER_TASK:-1}"
+echo "GPUs: ${GPU_COUNT:-auto}"
+echo "Workers: ${WORKERS}"
 
 cd "${PROJECT_ROOT}"
 python -m atlasgs.ops.prepare_gbm_medgs \
